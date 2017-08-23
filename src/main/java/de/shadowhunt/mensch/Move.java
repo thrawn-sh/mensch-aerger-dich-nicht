@@ -16,11 +16,9 @@
  */
 package de.shadowhunt.mensch;
 
-public abstract class Move {
+import javax.annotation.CheckForNull;
 
-    public static enum Type {
-        MOVE, MOVE_KILL, SAVE, SAVE_KILL, SPAWN, SPAWN_KILL;
-    }
+public abstract class Move {
 
     protected final int from;
 
@@ -28,10 +26,7 @@ public abstract class Move {
 
     protected final int to;
 
-    protected final Type type;
-
-    protected Move(final Type type, final int from, final int to, final Player target) {
-        this.type = type;
+    protected Move(final int from, final int to, @CheckForNull final Player target) {
         this.from = from;
         this.to = to;
         this.target = target;
@@ -55,15 +50,12 @@ public abstract class Move {
         if (to != other.to) {
             return false;
         }
-        if (type != other.type) {
-            return false;
-        }
         return true;
     }
 
     /**
      * Returns the filed index of the source of this move
-     * 
+     *
      * @return filed index of the source of this move
      */
     public final int getFrom() {
@@ -72,29 +64,21 @@ public abstract class Move {
 
     /**
      * Returns the owner of the pawn on the target field
-     * 
-     * @return owner of the pawn on the target field
+     *
+     * @return owner of the pawn on the target field or <code>null</code> if the to field is empty
      */
+    @CheckForNull
     public final Player getTarget() {
         return target;
     }
 
     /**
      * Returns the filed index of the destination of this move
-     * 
+     *
      * @return filed index of the destination of this move
      */
     public final int getTo() {
         return to;
-    }
-
-    /**
-     * Returns the type of the move
-     * 
-     * @return type of the move
-     */
-    public final Type getType() {
-        return type;
     }
 
     @Override
@@ -103,7 +87,6 @@ public abstract class Move {
         int result = 1;
         result = (prime * result) + from;
         result = (prime * result) + to;
-        result = (prime * result) + ((type == null) ? 0 : type.hashCode());
         return result;
     }
 
@@ -112,8 +95,8 @@ public abstract class Move {
     @Override
     public final String toString() {
         if (target == null) {
-            return type + "(" + from + " -> " + to + ")";
+            return from + " -> " + to;
         }
-        return type + "(" + from + " -> " + to + "[" + target + "])";
+        return from + " -> " + to + "[" + target + "]";
     }
 }

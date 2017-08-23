@@ -16,6 +16,8 @@
  */
 package de.shadowhunt.mensch.moves;
 
+import javax.annotation.CheckForNull;
+
 import de.shadowhunt.mensch.Board;
 import de.shadowhunt.mensch.Move;
 import de.shadowhunt.mensch.Player;
@@ -23,11 +25,11 @@ import de.shadowhunt.mensch.Player;
 public class SaveMove extends Move {
 
     public SaveMove(final int from, final int to) {
-        this(Type.SAVE, from, to, null);
+        this(from, to, null);
     }
 
-    SaveMove(final Type type, final int from, final int to, final Player target) {
-        super(type, from, to, target);
+    SaveMove(final int from, final int to, @CheckForNull final Player target) {
+        super(from, to, target);
     }
 
     @Override

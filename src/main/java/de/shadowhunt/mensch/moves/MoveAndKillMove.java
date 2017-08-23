@@ -22,7 +22,7 @@ import de.shadowhunt.mensch.Player;
 public class MoveAndKillMove extends MoveMove {
 
     public MoveAndKillMove(final int from, final int to, final Player target) {
-        super(Type.MOVE_KILL, from, to, target);
+        super(from, to, target);
     }
 
     @Override

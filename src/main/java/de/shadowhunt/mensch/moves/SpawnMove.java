@@ -16,6 +16,8 @@
  */
 package de.shadowhunt.mensch.moves;
 
+import javax.annotation.CheckForNull;
+
 import de.shadowhunt.mensch.Board;
 import de.shadowhunt.mensch.Move;
 import de.shadowhunt.mensch.Player;
@@ -23,11 +25,11 @@ import de.shadowhunt.mensch.Player;
 public class SpawnMove extends Move {
 
     public SpawnMove(final int to) {
-        this(Type.SPAWN, to, null);
+        this(to, null);
     }
 
-    SpawnMove(final Type type, final int to, final Player target) {
-        super(type, -1, to, target);
+    SpawnMove(final int to, @CheckForNull final Player target) {
+        super(-1, to, target);
     }
 
     @Override

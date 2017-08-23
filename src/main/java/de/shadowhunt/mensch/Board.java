@@ -21,6 +21,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import javax.annotation.CheckForNull;
+
 import de.shadowhunt.mensch.moves.MoveAndKillMove;
 import de.shadowhunt.mensch.moves.MoveMove;
 import de.shadowhunt.mensch.moves.SaveAndKillMove;
@@ -55,7 +57,7 @@ public class Board {
     private final int[] safePawns;
 
     public Board(final long seed, final Player... players) {
-        this.players = players;
+        this.players = Arrays.copyOf(players, players.length);
         fields = new Player[players.length * FIELDS_PER_PLAYER];
         random = new Random(seed);
 
@@ -162,7 +164,7 @@ public class Board {
         safePawns[getPlayerIndex(player)]++;
     }
 
-    public Player setField(final int field, final Player player) {
+    public Player setField(final int field, @CheckForNull final Player player) {
         final Player old = fields[field];
         fields[field] = player;
         return old;
