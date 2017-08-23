@@ -16,7 +16,7 @@
  */
 package de.shadowhunt.mensch;
 
-public class GameInformation {
+public final class GameInformation {
 
     private final Board board;
 

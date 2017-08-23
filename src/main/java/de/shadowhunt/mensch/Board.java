@@ -32,7 +32,7 @@ import de.shadowhunt.mensch.moves.SpawnMove;
 import de.shadowhunt.mensch.player.FirstMovePlayer;
 import de.shadowhunt.mensch.player.RandomDeterministicPlayer;
 
-public class Board {
+public final class Board {
 
     public static final int FIELDS_PER_PLAYER = 10;
 
@@ -66,23 +66,23 @@ public class Board {
         Arrays.fill(pawns, PAWNS_PER_PLAYER);
     }
 
-    protected int getDiceRoll() {
+    private int getDiceRoll() {
         return 1 + random.nextInt(6);
     }
 
-    public Player[] getFields() {
+    Player[] getFields() {
         return Arrays.copyOf(fields, fields.length);
     }
 
-    protected int getNewPawnCount(final Player player) {
+    int getNewPawnCount(final Player player) {
         return pawns[getPlayerIndex(player)];
     }
 
-    public int getPlayerCount() {
+    int getPlayerCount() {
         return players.length;
     }
 
-    public int getPlayerIndex(final Player player) {
+    int getPlayerIndex(final Player player) {
         for (int i = 0; i < players.length; i++) {
             if (player.equals(players[i])) {
                 return i;
@@ -91,7 +91,7 @@ public class Board {
         return -1;
     }
 
-    protected Set<Move> getPossibleMoves(final Player player, final int dice) {
+    private Set<Move> getPossibleMoves(final Player player, final int dice) {
         final int index = getPlayerIndex(player);
         final Set<Move> moves = new HashSet<>();
         if ((dice == 6) && (getNewPawnCount(player) > 0)) {
@@ -127,11 +127,11 @@ public class Board {
         return moves;
     }
 
-    protected int getSavePawnCount(final Player player) {
+    int getSavePawnCount(final Player player) {
         return safePawns[getPlayerIndex(player)];
     }
 
-    public Player play() {
+    protected Player play() {
         final GameInformation gameInformation = new GameInformation(this);
         while (true) {
             for (final Player player : players) {
