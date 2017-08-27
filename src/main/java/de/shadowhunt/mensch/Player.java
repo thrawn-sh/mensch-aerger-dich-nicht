@@ -18,6 +18,8 @@ package de.shadowhunt.mensch;
 
 import java.util.Collection;
 
+import javax.annotation.CheckForNull;
+
 public abstract class Player {
 
     private final String name;
@@ -33,6 +35,7 @@ public abstract class Player {
      *            collections of all possible moves
      * @return chosen move
      */
+    @CheckForNull
     public abstract Move choose(final Collection<Move> possibleMoves, final GameInformation information);
 
     @Override

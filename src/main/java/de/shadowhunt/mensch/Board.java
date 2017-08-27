@@ -144,9 +144,14 @@ public final class Board {
                     System.out.println("  can not make a move!");
                 } else {
                     final Move move = player.choose(possibleMoves, gameInformation);
-                    assert possibleMoves.contains(move);
-                    move.perform(player, this);
-                    System.out.println("  moves: " + move);
+                    if (move == null) {
+                        System.out.println("  don't want to move");
+                    } else if (!possibleMoves.contains(move)) {
+                        System.out.println("  cheated -> no move");
+                    } else {
+                        move.perform(player, this);
+                        System.out.println("  moves: " + move);
+                    }
                 }
 
                 if (getSavePawnCount(player) >= PAWNS_PER_PLAYER) {
